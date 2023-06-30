@@ -1,8 +1,7 @@
-import { DynamicModule, Global, Module } from "@nestjs/common";
-import { ModuleAsyncOptions, ModuleOptions } from "./types";
-import { CorrelationIdCoreModule } from "./correlation-id-core.module";
+import { DynamicModule, Global, Module } from '@nestjs/common';
+import { ModuleAsyncOptions, ModuleOptions } from './types';
+import { CorrelationIdCoreModule } from './correlation-id-core.module';
 
-@Global()
 @Module({})
 export class CorrelationIdModule {
   public static forRoot(options?: ModuleOptions): DynamicModule {
