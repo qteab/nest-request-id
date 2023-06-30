@@ -1,4 +1,4 @@
-import fs from "node:fs";
+const fs = require('node:fs')
 
 const config = JSON.parse(fs.readFileSync(`${__dirname}/.swcrc`, "utf-8"));
 config.exclude = [];

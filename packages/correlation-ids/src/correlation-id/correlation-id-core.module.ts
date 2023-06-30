@@ -24,10 +24,10 @@ export class CorrelationIdCoreModule implements NestModule {
     };
 
     return {
-      exports: [],
+      exports: [CorrelationIdService],
       imports: options.imports,
       module: CorrelationIdCoreModule,
-      providers: [optionsProvider],
+      providers: [optionsProvider, CorrelationIdService],
     };
   }
 
@@ -40,7 +40,7 @@ export class CorrelationIdCoreModule implements NestModule {
     return {
       exports: [CorrelationIdService],
       module: CorrelationIdCoreModule,
-      providers: [optionsProvider],
+      providers: [optionsProvider, CorrelationIdService],
     };
   }
 

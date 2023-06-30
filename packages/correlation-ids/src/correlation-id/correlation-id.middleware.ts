@@ -13,7 +13,7 @@ export class CorrelationIdMiddleware implements NestMiddleware {
   ) {}
   use(request: Request, res: Response, next: NextFunction) {
     const correlationIdFromHeader = this.options?.headerName
-      ? request.headers[this.options.headerName]
+      ? request.headers[this.options.headerName.toLocaleLowerCase()]
       : undefined;
     const correlationId =
       correlationIdFromHeader && typeof correlationIdFromHeader === "string"

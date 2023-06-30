@@ -5,15 +5,13 @@ import { TestController } from "./test.controller";
 
 const HEADER_NAME = "Test-Correlation-Id";
 
-describe("CorrelationIdModule.forRootAsync", () => {
+describe("CorrelationIdModule.forRoot", () => {
   let client: () => request.SuperTest<request.Test>;
   beforeAll(async () => {
     const module = await Test.createTestingModule({
       imports: [
-        CorrelationIdModule.forRootAsync({
-          useFactory: () => ({
-            headerName: HEADER_NAME,
-          }),
+        CorrelationIdModule.forRoot({
+          headerName: HEADER_NAME,
         }),
       ],
       controllers: [TestController],

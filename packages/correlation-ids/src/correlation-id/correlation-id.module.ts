@@ -1,18 +1,10 @@
-import {
-  DynamicModule,
-  Global,
-  MiddlewareConsumer,
-  Module,
-  NestModule,
-  RequestMethod,
-} from "@nestjs/common";
-import { CorrelationIdMiddleware } from "./correlation-id.middleware";
+import { DynamicModule, Global, Module } from "@nestjs/common";
 import { ModuleAsyncOptions, ModuleOptions } from "./types";
 import { CorrelationIdCoreModule } from "./correlation-id-core.module";
 
 @Global()
 @Module({})
-export class CorrelationIdModule implements NestModule {
+export class CorrelationIdModule {
   public static forRoot(options?: ModuleOptions): DynamicModule {
     return {
       module: CorrelationIdModule,
@@ -25,11 +17,5 @@ export class CorrelationIdModule implements NestModule {
       module: CorrelationIdModule,
       imports: [CorrelationIdCoreModule.forRootAsync(options)],
     };
-  }
-
-  public configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(CorrelationIdMiddleware)
-      .forRoutes({ path: "*", method: RequestMethod.ALL });
   }
 }
