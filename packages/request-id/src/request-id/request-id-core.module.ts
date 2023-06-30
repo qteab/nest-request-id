@@ -7,15 +7,15 @@ import {
   NestModule,
   RequestMethod,
   ValueProvider,
-} from "@nestjs/common";
-import { CorrelationIdMiddleware } from "./correlation-id.middleware";
-import { ModuleAsyncOptions, ModuleOptions } from "./types";
-import { CorrelationIdService } from "./correlation-id.service";
-import { MODULE_OPTIONS_KEY } from "./correlation-id.constants";
+} from '@nestjs/common';
+import { RequestIdMiddleware } from './request-id.middleware';
+import { ModuleAsyncOptions, ModuleOptions } from './types';
+import { RequestIdService } from './request-id.service';
+import { MODULE_OPTIONS_KEY } from './request-id.constants';
 
 @Global()
 @Module({})
-export class CorrelationIdCoreModule implements NestModule {
+export class RequestIdCoreModule implements NestModule {
   public static forRootAsync(options: ModuleAsyncOptions): DynamicModule {
     const optionsProvider: FactoryProvider = {
       provide: MODULE_OPTIONS_KEY,
@@ -24,10 +24,10 @@ export class CorrelationIdCoreModule implements NestModule {
     };
 
     return {
-      exports: [CorrelationIdService],
+      exports: [RequestIdService],
       imports: options.imports,
-      module: CorrelationIdCoreModule,
-      providers: [optionsProvider, CorrelationIdService],
+      module: RequestIdCoreModule,
+      providers: [optionsProvider, RequestIdService],
     };
   }
 
@@ -38,15 +38,15 @@ export class CorrelationIdCoreModule implements NestModule {
     };
 
     return {
-      exports: [CorrelationIdService],
-      module: CorrelationIdCoreModule,
-      providers: [optionsProvider, CorrelationIdService],
+      exports: [RequestIdService],
+      module: RequestIdCoreModule,
+      providers: [optionsProvider, RequestIdService],
     };
   }
 
   public configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(CorrelationIdMiddleware)
-      .forRoutes({ path: "*", method: RequestMethod.ALL });
+      .apply(RequestIdMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
   }
 }

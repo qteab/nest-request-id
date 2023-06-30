@@ -1,26 +1,26 @@
-# Nest Correlation IDs
+# Nest Request ID
 
-This package uses middleware to set a correlation ID for each request or optionally sets the request ID from a user defined header.
+This package uses middleware to set a request ID for each request or optionally sets the request ID from a user defined header.
 
 ## Installation
 
 ```bash
-pnpm add @qte/nest-correlation-ids
-yarn add @qte/nest-correlation-ids
-npm i @qte/nest-correlation-ids
+pnpm add @qte/nest-request-id
+yarn add @qte/nest-request-id
+npm i @qte/nest-request-id
 ```
 
 Make sure you've also installed the peer dependencies `@nestjs/core`, `@nestjs/common`, `@nestjs/platform-express`, `rxjs` and `reflect-metadata`
 
 ## Basic usage
 
-Import the `CorrelationIdModule` synchronously (`forRoot`) or asynchronously (`forRootAsync`).
+Import the `RequestIdModule` synchronously (`forRoot`) or asynchronously (`forRootAsync`).
 
 ```typescript
 @Module({
   imports: [
-    CorrelationIdModule.forRoot({
-      headerName: 'Cool-Project-Correlation-Id',
+    RequestIdModule.forRoot({
+      headerName: 'Cool-Request-Id',
     }),
   ],
 })
@@ -31,13 +31,13 @@ export class AppModule {}
 @Module({
   imports: [
     ConfigurationModule,
-    CorrelationIdModule.forRootAsync({
+    RequestIdModule.forRootAsync({
       imports: [ConfigurationModule],
       inject: [ConfigurationService]
       useFactory: (configService: ConfigurationService) => {
         const headerNameFromConfig =
         return {
-          headerName: 'Cool-Project-Correlation-Id',
+          headerName: 'Cool-Project-Request-Id',
         };
       },
     }),
@@ -46,15 +46,30 @@ export class AppModule {}
 export class AppModule {}
 ```
 
-When module is imported you can inject the `CorrelationIdService` to any provider.
+When module is imported you can inject the `RequestIdService` to any provider or you can use the `getRequestId()` function.
 
 ```typescript
+import { RequestIdService } from '@qte/nest-request-id';
+
 @Injectable()
 class CoolService {
-  constructor(private readonly correlationIdService: CorrelationIdService) {}
+  constructor(private readonly requestIdService: RequestIdService) {}
 
   public someFunction() {
-    console.log(correlationIdService.get());
+    console.log(requestIdService.get());
+  }
+}
+```
+
+```typescript
+import { getRequestId } from '@qte/nest-request-id';
+
+@Injectable()
+class CoolService {
+  constructor() {}
+
+  public someFunction() {
+    console.log(getRequestId());
   }
 }
 ```

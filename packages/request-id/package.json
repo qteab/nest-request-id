@@ -1,5 +1,5 @@
 {
-  "name": "@qte/nest-correlation-ids",
+  "name": "@qte/nest-request-id",
   "version": "0.0.3",
   "main": "dist/index",
   "types": "dist/index",

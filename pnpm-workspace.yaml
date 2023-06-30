@@ -1,2 +1,2 @@
 packages:
-  - "packages/correlation-ids"
+  - 'packages/request-id'

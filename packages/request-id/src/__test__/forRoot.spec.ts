@@ -1,16 +1,14 @@
 import { Test } from '@nestjs/testing';
-import { CorrelationIdModule } from '~/correlation-id';
+import { RequestIdModule } from '~/request-id';
 
-const HEADER_NAME = 'Test-Correlation-Id';
+const HEADER_NAME = 'Test-Request-Id';
 
-describe('CorrelationIdModule.forRootAsync', () => {
+describe('RequestIdModule.forRoot', () => {
   it('initializes correctly', async () => {
     const module = await Test.createTestingModule({
       imports: [
-        CorrelationIdModule.forRootAsync({
-          useFactory: () => ({
-            headerName: HEADER_NAME,
-          }),
+        RequestIdModule.forRoot({
+          headerName: HEADER_NAME,
         }),
       ],
       controllers: [],
