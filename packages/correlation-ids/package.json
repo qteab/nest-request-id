@@ -30,11 +30,11 @@
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
-    "@nestjs/common": "ˆ9.0.0 || ^10.0.0",
-    "@nestjs/core": "ˆ9.0.0 || ^10.0.0",
-    "@nestjs/platform-express": "ˆ9.0.0 || ^10.0.0",
+    "@nestjs/common": "9.x || 10.x",
+    "@nestjs/core": "9.x || 10.x",
+    "@nestjs/platform-express": "9.x || 10.x",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.0"
+    "rxjs": "^7.8.1"
   },
   "publishConfig": {
     "access": "public"
